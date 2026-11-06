@@ -32,6 +32,10 @@ jobs:
           echo "runner.os=$OS"
           echo "head_ref=$HEAD_REF"
           echo "base_ref=$BASE_REF"
+      - name: Afficher github en JSON
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Récupérer le code
         uses: actions/checkout@v7
       - name: Installer Python 3.13
