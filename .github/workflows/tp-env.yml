@@ -1,6 +1,16 @@
 name: Env, Inputs and Outputs Lab
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: Environnement cible
+        required: true
+        type: choice
+        options: [dev, staging, prod]
+      version:
+        description: Version à déployer
+        type: string
+        default: "1.0.0"
 
 jobs:
   build:
@@ -15,6 +25,11 @@ jobs:
           echo "APP_NAME in this step=<$APP_NAME>"
       - name: Print environment variables
         run: echo "Application $APP_NAME built on $BUILD_DATE"
+      - name: Print deployment inputs
+        env:
+          TARGET_ENV: ${{ inputs.environment }}
+          DEPLOY_VERSION: ${{ inputs.version }}
+        run: echo "Environment=$TARGET_ENV Version=$DEPLOY_VERSION"
 
   verify-env:
     runs-on: ubuntu-latest
