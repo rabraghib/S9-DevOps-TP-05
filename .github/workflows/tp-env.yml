@@ -11,6 +11,10 @@ on:
         description: Version à déployer
         type: string
         default: "1.0.0"
+      debug:
+        description: Afficher les informations de debug
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -30,6 +34,9 @@ jobs:
           TARGET_ENV: ${{ inputs.environment }}
           DEPLOY_VERSION: ${{ inputs.version }}
         run: echo "Environment=$TARGET_ENV Version=$DEPLOY_VERSION"
+      - name: Print debug information
+        if: ${{ inputs.debug }}
+        run: echo "Debug enabled on $RUNNER_OS"
 
   verify-env:
     runs-on: ubuntu-latest
