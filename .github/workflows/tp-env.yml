@@ -63,3 +63,8 @@ jobs:
           FULL_VERSION: ${{ needs.build.outputs.full_version }}
           TARGET_ENV: ${{ inputs.environment }}
         run: echo "Deploying $FULL_VERSION to $TARGET_ENV"
+
+  call-greeting:
+    uses: ./.github/workflows/greeting.yml
+    with:
+      recipient: ${{ inputs.environment }}

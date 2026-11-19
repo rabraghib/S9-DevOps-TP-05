@@ -1,0 +1,16 @@
+name: Greeting
+on:
+  workflow_call:
+    inputs:
+      recipient:
+        type: string
+        required: true
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print greeting
+        env:
+          RECIPIENT: ${{ inputs.recipient }}
+        run: echo "Bonjour $RECIPIENT"
